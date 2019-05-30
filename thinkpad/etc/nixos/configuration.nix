@@ -16,6 +16,19 @@
   filebeat.logstash.host = "localhost";
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+      (self: super: {
+        nginxCustom = super.nginx.override {
+          modules = let m = super.nginxModules;
+          in [ m.rtmp
+               m.dav
+               m.moreheaders
+               m.lua
+             ];
+        };
+      })
+  ];
+
 
   # fileSystems."/home/stefan/askby_files" = {
   #     device = "//files.askby.net/askby_files";
@@ -86,8 +99,14 @@
        # }];
        trustedUsers = [ "root" "stefan" ];
 
+       # extraOptions = ''
+       #   secret-key-files = /home/stefan/test1-secret.txt
+       # '';
+
        binaryCaches = [
-           http://18.185.36.89:8080
+           # http://18.185.36.89:8080 # aws build0
+          # "http://80.158.35.108:5000" # otc build0
+           # http://192.168.1.208:5000 # otc build0
            https://cache.nixos.org/
           "https://hie-nix.cachix.org"
        ];
@@ -127,6 +146,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.printing.drivers = [ pkgs.gutenprint ];
+
   services.upower.enable = true;
   services.redis.enable = true;
 
@@ -162,14 +183,78 @@
     isNormalUser = true;
     home = "/home/stefan";
     description = "Stefan";
-    extraGroups = ["wheel" "networkmanager" "input"];
+    extraGroups = ["wheel" "networkmanager" "input" "docker"];
     shell = pkgs.zsh;
     uid = 1000;
   };
 
   programs.slock.enable = true;
 
-  networking.firewall.allowedTCPPorts = [5672 15672];
+  networking.firewall.allowedTCPPorts = [5672 15672 8000 80 8303 8080 8888];
+  networking.firewall.allowedUDPPorts = [5672 15672 8000 80 8303 8080 8888];
+  networking.extraHosts = ''
+    127.0.0.1 nginx-lua
+    '';
+
+  services.nginx = {
+    enable = true;
+    # package = pkgs.nginxCustom;
+    # package = pkgs.openresty;
+    package = pkgs.callPackage ./openresty.nix {};
+
+    appendHttpConfig =
+      let
+        luapkgs = pkgs.callPackage ./lua.nix {};
+      in
+    ''
+      lua_package_path "${luapkgs.lua-resty-jwt}/lib/?.lua;${luapkgs.lua-resty-string}/lib/?.lua;${luapkgs.lua-resty-hmac}/lib/?.lua;;";
+    '';
+
+
+    virtualHosts = {
+      "askby-api" = {
+        listen = [{addr = "0.0.0.0"; port = 4000; ssl = false;}];
+        locations."/".extraConfig = ''
+           proxy_pass http://127.0.0.1:8800;
+           proxy_set_header x-askby-customer-name thalia;
+           proxy_set_header x-askby-userid 0;
+        '';
+      };
+
+     "nginx-lua" = {
+       listen = [{addr = "0.0.0.0"; port = 80; ssl = false;}];
+       locations."/".extraConfig = ''
+         default_type 'text/plain';
+
+         # access_by_lua_file /home/stefan/repos/nixos-configs/thinkpad/etc/nixos/access.lua;
+         rewrite_by_lua_file /home/stefan/repos/nixos-configs/thinkpad/etc/nixos/rewrite.lua;
+         # content_by_lua_file /home/stefan/repos/nixos-configs/thinkpad/etc/nixos/test.lua;
+
+         proxy_set_header Host $http_host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Proto $scheme;
+         proxy_pass http://127.0.0.1:3000;
+
+         # content_by_lua_block {
+         #     ngx.say('Hello,world!')
+         # }
+       '';
+       };
+    };
+
+
+        # enableACME = false;
+        # forceSSL = false;
+        # root = "/home/stefan/repos/ask-clara/_site";
+        # locations."/".extraConfig = ''
+        #   add_header Cache-Control no-cache;
+        #   expires 1s;
+        # '';
+
+  };
+
+
 
   services.rabbitmq = {
       enable = true;
@@ -267,6 +352,25 @@
   #     };
   # };
 
+  # systemd.services.foo = {
+  #     enable = true;
+  #     description = "looker worker";
+  #     serviceConfig = {
+  #         Restart = "always";
+  #         RestartSec = 5;
+  #         # ExecStart = "/home/stefan/repos/askby_looker/dist/build/askby-looker/askby-looker";
+  #     };
+  #     wantedBy = ["multi-user.target"];
+
+
+  #     # python -c "import sys; while True: import time; time.sleep(1); print('hello')"
+  #     # /home/stefan/repos/askby_looker/dist/build/askby-looker/askby-looker
+  #     script = ''
+  #     export PATH=${pkgs.python3}/bin:$PATH
+  #     python3 -c "while True: import time, sys; time.sleep(1); print('hello'); sys.stdout.flush()"
+  #     '';
+  # };
+
   services.openvpn.servers = {
       aws = {
           autoStart = true;
@@ -315,4 +419,22 @@
   };
 
   services.postgresql.enable = true;
+
+  fonts.fonts = with pkgs; [
+      # noto-fonts
+      # noto-fonts-cjk
+      # noto-fonts-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      mplus-outline-fonts
+      dina-font
+      proggyfonts
+  ];
+
+  virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchDocked = "suspend";
 }
