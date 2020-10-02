@@ -30,4 +30,6 @@
 
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  hardware.sane.enable = true;
 }

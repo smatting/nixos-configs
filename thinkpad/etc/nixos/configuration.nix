@@ -66,11 +66,11 @@
   networking.networkmanager.appendNameservers = ["8.8.8.8"];
 
   # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  i18n = {
+    consoleFont = "Lat2-Terminus16";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -79,6 +79,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     exfat wget vim hello curl wget
+    firefox
   ];
 
   hardware.pulseaudio.enable = true;
@@ -116,13 +117,26 @@
            "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
        ];
 
-       nixPath = [
-           "nixpkgs-overlays=/home/stefan/repos/apkgs/overlays"
-           "apkgs=/home/stefan/repos/apkgs"
-           "ssh-config-file=/nix/store/4vxmfvdj9fl5adw48y5sq5hnxqg25by2-config"
-           "nixpkgs=/home/stefan/repos/askby_nixpkgs"
+       # nixPath = [
+       #     "nixpkgs-overlays=/home/stefan/repos/apkgs/overlays"
+       #     "apkgs=/home/stefan/repos/apkgs"
+       #     "ssh-config-file=/nix/store/4vxmfvdj9fl5adw48y5sq5hnxqg25by2-config"
+       #     # "nixpkgs=/home/stefan/repos/askby_nixpkgs"
+       #     # "nixos-config=/etc/nixos/configuration.nix"
+       # ];
+
+       nixPath =
+         [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs"
            "nixos-config=/etc/nixos/configuration.nix"
-       ];
+           "/nix/var/nix/profiles/per-user/root/channels"
+         ]
+         ++
+         [
+             # "nixpkgs-overlays=/home/stefan/repos/apkgs/overlays"
+             "apkgs=/home/stefan/repos/apkgs"
+             "ssh-config-file=/nix/store/4vxmfvdj9fl5adw48y5sq5hnxqg25by2-config"
+         ];
+
    };
 
 
@@ -183,15 +197,15 @@
     isNormalUser = true;
     home = "/home/stefan";
     description = "Stefan";
-    extraGroups = ["wheel" "networkmanager" "input" "docker"];
+    extraGroups = ["wheel" "networkmanager" "input" "docker" "video" "adbusers"];
     shell = pkgs.zsh;
     uid = 1000;
   };
 
   programs.slock.enable = true;
 
-  networking.firewall.allowedTCPPorts = [5672 15672 8000 80 8303 8080 8888];
-  networking.firewall.allowedUDPPorts = [5672 15672 8000 80 8303 8080 8888];
+  networking.firewall.allowedTCPPorts = [5672 15672 8000 80 8303 8080 8888 5000 8612];
+  networking.firewall.allowedUDPPorts = [5672 15672 8000 80 8303 8080 8888 5000 8612];
   networking.extraHosts = ''
     127.0.0.1 nginx-lua
     '';
@@ -279,13 +293,13 @@
       '';
   };
 
-  systemd.services.hoogle = {
-    enable = true;
-    script = ''
-      /home/stefan/.nix-profile/bin/hoogle server -p 7777 --local
-    '';
-    wantedBy = [ "multi-user.target" ];
-  };
+  # systemd.services.hoogle = {
+  #   enable = true;
+  #   script = ''
+  #     /home/stefan/.nix-profile/bin/hoogle server -p 7777 --local
+  #   '';
+  #   wantedBy = [ "multi-user.target" ];
+  # };
 
   services.prometheus = {
     enable = true;
@@ -420,6 +434,11 @@
 
   services.postgresql.enable = true;
 
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql;
+  };
+
   fonts.fonts = with pkgs; [
       # noto-fonts
       # noto-fonts-cjk
@@ -437,4 +456,118 @@
 
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchDocked = "suspend";
+
+  services.squid = {
+    enable = true;
+    configText = ''
+      # Recommended minimum configuration (3.5):
+      #
+
+      # Example rule allowing access from your local networks.
+      # Adapt to list your (internal) IP networks from where browsing
+      # should be allowed
+      acl localnet src 10.0.0.0/8     # RFC 1918 possible internal network
+      acl localnet src 172.16.0.0/12  # RFC 1918 possible internal network
+      acl localnet src 192.168.0.0/16 # RFC 1918 possible internal network
+      acl localnet src 169.254.0.0/16 # RFC 3927 link-local (directly plugged) machines
+      acl localnet src fc00::/7       # RFC 4193 local private network range
+      acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines
+
+      acl SSL_ports port 443          # https
+      acl Safe_ports port 80          # http
+      acl Safe_ports port 21          # ftp
+      acl Safe_ports port 443         # https
+      acl Safe_ports port 70          # gopher
+      acl Safe_ports port 210         # wais
+      acl Safe_ports port 1025-65535  # unregistered ports
+      acl Safe_ports port 280         # http-mgmt
+      acl Safe_ports port 488         # gss-http
+      acl Safe_ports port 591         # filemaker
+      acl Safe_ports port 777         # multiling http
+      acl CONNECT method CONNECT
+
+      #
+      # Recommended minimum Access Permission configuration:
+      #
+      # Deny requests to certain unsafe ports
+      http_access deny !Safe_ports
+
+      # Deny CONNECT to other than secure SSL ports
+      http_access deny CONNECT !SSL_ports
+
+      # Only allow cachemgr access from localhost
+      http_access allow localhost manager
+      http_access deny manager
+
+      # We strongly recommend the following be uncommented to protect innocent
+      # web applications running on the proxy server who think the only
+      # one who can access services on "localhost" is a local user
+      http_access deny to_localhost
+
+      # Application logs to syslog, access and store logs have specific files
+      cache_log       syslog
+      access_log      stdio:/var/log/squid/access.log
+      cache_store_log stdio:/var/log/squid/store.log
+
+      # Required by systemd service
+      pid_filename    /run/squid.pid
+
+      # Run as user and group squid
+      cache_effective_user squid squid
+
+      #
+      # INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS
+      #
+      maximum_object_size 1024 MB
+      max_stale 2 weeks
+      cache_dir ufs /var/cache/squid3 10240 32 512
+
+      # refresh pattern for debs and udebs
+      refresh_pattern deb$   129600 100% 129600
+      refresh_pattern udeb$   129600 100% 129600
+      refresh_pattern tar.gz$  129600 100% 129600
+      refresh_pattern tar.xz$  129600 100% 129600
+      refresh_pattern tar.bz2$  129600 100% 129600
+
+      # Example rule allowing access from your local networks.
+      # Adapt localnet in the ACL section to list your (internal) IP networks
+      # from where browsing should be allowed
+      http_access allow localnet
+      http_access allow localhost
+
+      # allow everyone
+      http_access allow all
+
+      # Squid normally listens to port 3128
+      http_port 3128
+
+      # Leave coredumps in the first cache dir
+      coredump_dir /var/cache/squid
+
+      #
+      # Add any of your own refresh_pattern entries above these.
+      #
+      refresh_pattern ^ftp:           1440    20%     10080
+      refresh_pattern ^gopher:        1440    0%      1440
+      refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+      refresh_pattern .               0       20%     4320
+    '';
+    # extraConfig = ''
+    #     maximum_object_size 1024 MB
+    #     max_stale 2 weeks
+    #     cache_dir ufs /var/cache/squid3 10240 32 512
+    #     refresh_pattern . 60 50% 14400 store-stale
+    # '';
+  };
+
+  programs.zsh.enable = true;
+  services.udev.packages = [ pkgs.android-udev-rules ];
+  programs.adb.enable = true;
+
+  # services.xl2tpd.enable = false;
+  # networking.networkmanager.enableStrongSwan = false;
+  # networking.networkmanager.packages = [ pkgs.libreswan ];
+
+  services.mysql.enable = true;
+
 }
