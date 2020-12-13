@@ -14,9 +14,11 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6c47bc55-dc19-4069-b493-b95485fa6904";
+    { device = "/dev/disk/by-uuid/4961bd05-9d76-46a1-b98c-6340369be619";
       fsType = "ext4";
     };
+
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/bea603d3-0786-4417-8c0b-50b9cfb84adb";
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/6B65-36FA";
@@ -26,6 +28,4 @@
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 16;
-
-  hardware.bluetooth.enable = true;
 }
