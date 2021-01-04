@@ -43,15 +43,14 @@
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    emacsGcc
     # eog
     # graphmod
     # xfd
     # xmessage
+
     aws
+    baobab
     blueman
     brightnessctl
     broot
@@ -59,19 +58,23 @@
     cachix
     cassandra
     cookiecutter
+    curl
     dhall
     dhall-json
     direnv
     dmenu
+    dnsutils
     docker-compose
     dropbox
     dunst
+    emacsGcc
     fd
     feh
     file
     firefox
     font-manager
     fzf
+    gcc
     gdb
     ghcid
     git
@@ -99,6 +102,7 @@
     networkmanagerapplet
     newman
     niv
+    nix-prefetch-github
     nodejs
     notify-desktop
     notify-osd
@@ -107,9 +111,11 @@
     p7zip
     pavucontrol
     pinentry
+    python3
     postman
     scrot
     sct
+    shellcheck
     silver-searcher
     stalonetray
     tmate
@@ -119,7 +125,8 @@
     v4l-utils
     v8
     vlc
-    #wire-desktop-internal
+    wget
+    wire-desktop-internal
     xclip
     xdot
     xfontsel
@@ -216,6 +223,18 @@
   programs.gnupg.agent.pinentryFlavor = "curses";
 
   services.openssh.enable = true;
+
+  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitchDocked = "ignore";
+  services.logind.lidSwitchExternalPower = "ignore";
+
+  # environment.etc = {
+  #   "resolv.conf".text = ''
+  #     nameserver 8.8.8.8
+  #     nameserver 1.1.1.1
+  #     nameserver 9.9.9.9
+  #   '';
+  # };
 
 }
 

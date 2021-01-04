@@ -25,7 +25,7 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [{device = "/dev/nvme0n1p4";}];
 
   nix.maxJobs = lib.mkDefault 16;
 }

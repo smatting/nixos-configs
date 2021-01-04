@@ -6,7 +6,7 @@
   pkgs = import sources.nixpkgs {
     config = {
       allowUnfree = true;
-      overlays = import ./overlays.nix;
     };
+    overlays = import ./overlays.nix;
   };
 }
