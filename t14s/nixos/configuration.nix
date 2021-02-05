@@ -13,6 +13,9 @@
       ./cachix.nix
     ];
 
+  nix.binaryCachePublicKeys = [ "wire-server.cachix.org-1:Xd170qZSd0X8ry+QzsQSVZuP3lIIQVfAJtthCk6/FLU=" ];
+  nix.binaryCaches = [ "https://wire-server.cachix.org" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
@@ -59,13 +62,14 @@
     cassandra
     cookiecutter
     curl
+    dbeaver
     dhall
     dhall-json
     direnv
     dmenu
     dnsutils
     docker-compose
-    dropbox
+    # dropbox
     dunst
     emacsGcc
     fd
@@ -77,10 +81,12 @@
     gcc
     gdb
     ghcid
+    gimp
     git
     gitg
     gmrun
     gnumake
+    gnumeric
     google-chrome
     gparted
     graphviz
@@ -91,12 +97,14 @@
     htop
     inconsolata
     jq
+    jre
     jsonnet
     killall
     kitty
     kubectl
     libinput-gestures
     libnotify
+    libxml2
     moreutils
     neovim
     networkmanagerapplet
@@ -108,14 +116,16 @@
     notify-osd
     openssl
     ormolu
+    pandoc
     p7zip
     pavucontrol
     pinentry
-    python3
+    (python3.withPackages(ps: with ps; [plumbum ipython ipdb]))
     postman
     scrot
     sct
     shellcheck
+    signal-desktop
     silver-searcher
     stalonetray
     tmate
@@ -123,17 +133,19 @@
     tree
     unzip
     v4l-utils
+    visidata
     v8
     vlc
     wget
     wire-desktop-internal
     xclip
-    xdot
+    # xdot
     xfontsel
     xmagnify
     xmobar
     xsv
     yq-go
+    zoom-us
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
