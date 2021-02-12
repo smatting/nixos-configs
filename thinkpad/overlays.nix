@@ -3,8 +3,8 @@
     self: super:
         (import (
             builtins.fetchTarball {
-                url = "https://github.com/nix-community/emacs-overlay/archive/290c3dd9a8ba3523d47cf07b31df8e3e50895f98.tar.gz";
-                sha256 = "00hc17pkkc0ifvlvq6c0qvayqk1cjsgf7d29ma7xk3idz7rk9c9i";
+                url = "https://github.com/nix-community/emacs-overlay/archive/72277c12eb58c9d56c4f12db803fd9e8d78f336a.tar.gz";
+                sha256 = "1dbrxzy02m1haa53aaxqadn0xhkl94kd9svvjm0dhwvpp3rbbdgv";
             }
         )) self super
   )

@@ -86,8 +86,9 @@
     cachix
     chromium
     coq
+    coreutils
     ctags
-    curl
+    clang
     curl
     dbeaver
     dhall
@@ -100,6 +101,7 @@
     dunst
     easyrsa
     emacsGcc
+    etcher
     evince
     exfat
     fd
@@ -133,12 +135,15 @@
     pavucontrol
     postman
     pwgen
+    ripgrep
     rsync
     silver-searcher
     sqlite
+    stalonetray
     tmux
     vlc
     wget
+    xmobar
     xsel
     xsv
     youtube-dl
