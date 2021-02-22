@@ -52,7 +52,7 @@
     # xfd
     # xmessage
 
-    aws
+    awscli
     baobab
     blueman
     brightnessctl
@@ -61,6 +61,8 @@
     cachix
     cassandra
     cookiecutter
+    coreutils
+    clang
     curl
     dbeaver
     dhall
@@ -93,12 +95,14 @@
     haskellPackages.hoogle
     haskellPackages.hpack
     haskellPackages.implicit-hie
+    kubernetes-helm
     hlint
     htop
     inconsolata
     jq
     jre
     jsonnet
+    k9s
     killall
     kitty
     kubectl
@@ -122,12 +126,15 @@
     pinentry
     (python3.withPackages(ps: with ps; [plumbum ipython ipdb]))
     postman
+    ripgrep
     scrot
     sct
     shellcheck
     signal-desktop
     silver-searcher
+    spruce
     stalonetray
+    telepresence
     tmate
     tmux
     tree
