@@ -69,6 +69,7 @@
     dhall-json
     direnv
     dmenu
+    dpkg
     dnsutils
     docker-compose
     # dropbox
@@ -87,6 +88,7 @@
     git
     gitg
     gmrun
+    gnome3.eog
     gnumake
     gnumeric
     google-chrome
@@ -99,6 +101,8 @@
     hlint
     htop
     inconsolata
+    ispell
+    jmtpfs
     jq
     jre
     jsonnet
@@ -124,8 +128,16 @@
     p7zip
     pavucontrol
     pinentry
-    (python3.withPackages(ps: with ps; [plumbum ipython ipdb]))
+    (python3.withPackages(ps: with ps; [
+      ipdb
+      ipython
+      matplotlib
+      pandas
+      plumbum
+      requests
+    ]))
     postman
+    pwgen
     ripgrep
     scrot
     sct
@@ -138,11 +150,13 @@
     tmate
     tmux
     tree
+    unar
     unzip
     v4l-utils
     visidata
     v8
     vlc
+    weechat
     wget
     wire-desktop-internal
     xclip
@@ -152,8 +166,12 @@
     xmobar
     xsv
     yq-go
+    youtube-dl
+    vnstat
     zoom-us
   ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -254,6 +272,8 @@
   #     nameserver 9.9.9.9
   #   '';
   # };
+  #
+  services.vnstat.enable = true;
 
 }
 
