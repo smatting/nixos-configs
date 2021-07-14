@@ -74,10 +74,13 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # dhall-text
     # eog
+    (python3.withPackages(ps: with ps; [requests plumbum ipython ipdb]))
     apg
     appimage-run
     autossh
+    awscli
     baobab
     blueman
     bluez
@@ -85,15 +88,16 @@
     broot
     cachix
     chromium
+    clang
     coq
     coreutils
+    cryptsetup
     ctags
-    clang
     curl
+    dive
     dbeaver
     dhall
     dhall-json
-    # dhall-text
     direnv
     dmenu
     docker-compose
@@ -114,8 +118,11 @@
     git
     gitg
     gmrun
+    gnome3.eog
     gnucash
     gnupg
+    google-cloud-sdk
+    google-chrome
     gparted
     graphviz
     htop
@@ -125,10 +132,13 @@
     jq
     killall
     kitty
+    libnotify
     lsof
     neovim
     nethack
+    niv
     nmap
+    openssl
     ormolu
     p7zip
     pandoc
@@ -137,16 +147,21 @@
     pwgen
     ripgrep
     rsync
+    scrot
     silver-searcher
     sqlite
     stalonetray
     tmux
+    vcs
     vlc
+    weechat
     wget
     xmobar
+    xorg.xev
     xsel
     xsv
     youtube-dl
+    yq
   ];
 
   hardware.pulseaudio.enable = true;
@@ -240,7 +255,7 @@
   
     # Enable touchpad support.
     libinput.enable = true;
-    libinput.naturalScrolling = true;
+    libinput.naturalScrolling = false;
   
     # Enable the KDE Desktop Environment.
     # services.xserver.displayManager.sddm.enable = true;
