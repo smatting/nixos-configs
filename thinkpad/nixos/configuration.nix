@@ -54,7 +54,7 @@
 
 
   # networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   # networking.nameservers = ["213.239.242.238"];
   networking.networkmanager.appendNameservers = ["8.8.8.8"];
@@ -94,11 +94,11 @@
     cryptsetup
     ctags
     curl
-    dive
     dbeaver
     dhall
     dhall-json
     direnv
+    dive
     dmenu
     docker-compose
     dropbox
@@ -121,8 +121,8 @@
     gnome3.eog
     gnucash
     gnupg
-    google-cloud-sdk
     google-chrome
+    google-cloud-sdk
     gparted
     graphviz
     htop
@@ -136,6 +136,7 @@
     lsof
     neovim
     nethack
+    networkmanagerapplet
     niv
     nmap
     openssl
