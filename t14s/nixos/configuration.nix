@@ -13,7 +13,7 @@
       ./cachix.nix
     ];
 
-  nix.binaryCachePublicKeys = [ "wire-server.cachix.org-1:Xd170qZSd0X8ry+QzsQSVZuP3lIIQVfAJtthCk6/FLU=" ];
+  nix.binaryCachePublicKeys = [ "wire-server.cachix.org-1:fVWmRcvdsqzKek3X5Ad8nYNsBSjKZ9Um2NMLfMLS77Y=" ];
   nix.binaryCaches = [ "https://wire-server.cachix.org" ];
 
   # Use the systemd-boot EFI boot loader.
@@ -52,6 +52,7 @@
     # xfd
     # xmessage
 
+    autossh
     awscli
     baobab
     blueman
@@ -86,11 +87,13 @@
     ghcid
     gimp
     git
+    github-cli
     gitg
     gmrun
     gnome3.eog
     gnumake
     gnumeric
+    go
     google-chrome
     gparted
     graphviz
@@ -103,6 +106,7 @@
     inconsolata
     ispell
     jmtpfs
+    joplin
     jq
     jre
     jsonnet
@@ -135,6 +139,8 @@
       pandas
       plumbum
       requests
+      pyyaml
+      toposort
     ]))
     postman
     pwgen
@@ -147,10 +153,12 @@
     spruce
     stalonetray
     telepresence
+    tig
     tmate
     tmux
     tree
     unar
+    unison-ucm
     unzip
     v4l-utils
     visidata
@@ -164,6 +172,7 @@
     xfontsel
     xmagnify
     xmobar
+    xorg.xev
     xsv
     yq-go
     youtube-dl
@@ -257,7 +266,7 @@
   #   };
   # };
   programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryFlavor = "curses";
+  programs.gnupg.agent.pinentryFlavor = "gtk2";
 
   services.openssh.enable = true;
 
@@ -276,4 +285,3 @@
   services.vnstat.enable = true;
 
 }
-
