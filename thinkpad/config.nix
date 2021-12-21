@@ -1,5 +1,5 @@
 { sources ? import ./nix/sources.nix }:
-{
+rec {
   nixos = (import "${sources.nixpkgs}/nixos/default.nix") {
     configuration = import ./nixos/configuration.nix;
   };

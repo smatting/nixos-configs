@@ -127,6 +127,7 @@
     graphviz
     htop
     httpie
+    hledger
     imagemagick
     inkscape
     jq
@@ -243,7 +244,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.printing.drivers = [ pkgs.gutenprint ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.cups-zj-58 ];
 
   services.upower.enable = true;
   services.redis.enable = true;
@@ -256,7 +257,7 @@
   
     # Enable touchpad support.
     libinput.enable = true;
-    libinput.naturalScrolling = false;
+    libinput.touchpad.naturalScrolling = false;
   
     # Enable the KDE Desktop Environment.
     # services.xserver.displayManager.sddm.enable = true;

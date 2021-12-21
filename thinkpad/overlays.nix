@@ -8,4 +8,10 @@
             }
         )) self super
   )
+  (
+    self: super:
+    {
+      cups-zj-58  = super.callPackage ./nixos/zj-58/default.nix {};
+    }
+  )
 ]
