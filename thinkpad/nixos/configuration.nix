@@ -145,8 +145,10 @@
     p7zip
     pandoc
     pavucontrol
+    parted
     postman
     pwgen
+    redshift
     ripgrep
     rsync
     scrot
