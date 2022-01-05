@@ -136,6 +136,7 @@
     kitty
     libnotify
     lsof
+    lowbattery
     neovim
     nethack
     networkmanagerapplet
