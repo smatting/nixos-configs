@@ -249,7 +249,7 @@
   services.printing.drivers = [ pkgs.gutenprint pkgs.cups-zj-58 ];
 
   services.upower.enable = true;
-  services.redis.enable = true;
+  # services.redis.enable = false;
 
   services.xserver = {
     # Enable the X11 windowing system.
