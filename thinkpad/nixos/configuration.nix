@@ -114,6 +114,7 @@
     firefox
     font-manager
     fzf
+    gh
     gimp
     git
     gitg
@@ -155,6 +156,7 @@
     silver-searcher
     sqlite
     stalonetray
+    tree
     tmux
     vcs
     vlc
