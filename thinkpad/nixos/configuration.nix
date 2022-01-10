@@ -259,6 +259,11 @@
     enable = true;
     layout = "us";
     xkbOptions = "compose:caps";
+
+    videoDrivers = [ "intel" ];
+    deviceSection = ''
+      Option "DRI" "3"
+    '';
   
     # Enable touchpad support.
     libinput.enable = true;
