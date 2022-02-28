@@ -58,6 +58,7 @@
     blueman
     brightnessctl
     broot
+    buildah
     cabal-install
     cachix
     cassandra
@@ -84,6 +85,7 @@
     fzf
     gcc
     gdb
+    gettext
     ghcid
     gimp
     git
@@ -145,6 +147,7 @@
     postman
     pwgen
     ripgrep
+    runc
     scrot
     sct
     shellcheck
@@ -152,6 +155,8 @@
     silver-searcher
     spruce
     stalonetray
+    stern
+    taskwarrior
     telepresence
     tig
     tmate
