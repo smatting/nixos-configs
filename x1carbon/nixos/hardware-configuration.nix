@@ -29,6 +29,8 @@
   powerManagement.cpuFreqGovernor = "powersave";
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.disabledPlugins = [ "sap" ];
+
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   hardware.sane.enable = true;

@@ -299,7 +299,8 @@
   programs.slock.enable = true;
 
   networking.firewall.allowedTCPPorts = [5672 15672 8000 80 8303 8080 8888 5000 8612];
-  networking.firewall.allowedUDPPorts = [5672 15672 8000 80 8303 8080 8888 5000 8612];
+  networking.firewall.allowedUDPPorts = [6700 6701 6702 7000 7001 7002 7003 5672 15672 8000 80 8303 8080 8888 5000 8612];
+
   networking.extraHosts = ''
     127.0.0.1 nginx-lua
     '';
@@ -600,5 +601,6 @@
   programs.zsh.enable = true;
   services.udev.packages = [ pkgs.android-udev-rules ];
   programs.adb.enable = true;
+  programs.steam.enable = true;
 
 }
