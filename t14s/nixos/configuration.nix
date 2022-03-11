@@ -43,6 +43,8 @@
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
+  services.upower.enable = true;
+
   environment.systemPackages = with pkgs; [
     # eog
     # graphmod
@@ -116,6 +118,7 @@
     libinput-gestures
     libnotify
     libxml2
+    lowbattery
     moreutils
     neovim
     networkmanagerapplet
@@ -154,6 +157,7 @@
     stalonetray
     stern
     taskwarrior
+    timewarrior
     telepresence
     tig
     tmate

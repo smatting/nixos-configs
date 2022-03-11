@@ -9,4 +9,5 @@
     };
     overlays = import ./overlays.nix;
   };
+  nixpkgs = import sources.nixpkgs;
 }

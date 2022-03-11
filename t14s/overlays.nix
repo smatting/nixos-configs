@@ -20,14 +20,27 @@
     self: super:
         (import (
             builtins.fetchTarball {
-                url = "https://github.com/nix-community/emacs-overlay/archive/72277c12eb58c9d56c4f12db803fd9e8d78f336a.tar.gz";
-                sha256 = "1dbrxzy02m1haa53aaxqadn0xhkl94kd9svvjm0dhwvpp3rbbdgv";
+                url = "https://github.com/nix-community/emacs-overlay/archive/3247ccbb38dcc56e3617edfa10ab9f264ce4bedb.tar.gz";
+                sha256 = "0fasggl01bpsn953ls3zla6z7p49ankcm3jaz9fs5rdm74sz9xra";
             }
         )) self super
   )
   (
     self: super: {
       spruce = self.callPackage ./nix/spruce {};
+    }
+  )
+  (
+    self: super:
+    {
+      lowbattery  = super.python3Packages.callPackage
+        (
+          builtins.fetchTarball
+            {
+              url = https://github.com/smatting/low-battery/archive/2de915f91fd18d4ad8f810ab676a67f19fa26354.tar.gz;
+              sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
+            }
+        ) {};
     }
   )
 ]
