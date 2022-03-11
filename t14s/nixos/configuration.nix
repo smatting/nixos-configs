@@ -13,9 +13,6 @@
       ./cachix.nix
     ];
 
-  nix.binaryCachePublicKeys = [ "wire-server.cachix.org-1:fVWmRcvdsqzKek3X5Ad8nYNsBSjKZ9Um2NMLfMLS77Y=" ];
-  nix.binaryCaches = [ "https://wire-server.cachix.org" ];
-
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
