@@ -8,45 +8,50 @@ rec {
   };
   nixpkgs = import sources.nixpkgs;
   env = pkgs.buildEnv {
-      name = "macbook-env";
-      paths = with pkgs; [
+    name = "macbook-env";
+    paths = with pkgs;
+    let python3wp  =
+      (python3.withPackages(ps: with ps; [
+        ipdb
+        ipython
+        plumbum
+        requests
+        pyyaml
+      ]));
+      update-macbook = callPackage ./update-macbook {};
+    in
 
-coreutils
-curl
-man
-emacs
-fd
-htop
-ffmpeg
-gnupg
-jq
-lsof
-nethack
-p7zip
-pwgen
-ripgrep
-sqlite
-openssh
-bash
-tmux
-weechat
-youtube-dl
-wget
-rsync
-git
-direnv
-shellcheck
-taskwarrior
-tmate
-timewarrior
-(python3.withPackages(ps: with ps; [
-      ipdb
-      ipython
-      plumbum
-      requests
-      pyyaml
-    ]))
-
-      ];
+    [
+      bash
+      coreutils
+      curl
+      direnv
+      emacs
+      fd
+      ffmpeg
+      git
+      gnupg
+      htop
+      jq
+      lsof
+      man
+      nethack
+      openssh
+      p7zip
+      pwgen
+      python3wp
+      ripgrep
+      rsync
+      shellcheck
+      sqlite
+      taskwarrior
+      timewarrior
+      tmate
+      tmux
+      update-macbook
+      weechat
+      wget
+      youtube-dl
+    ];
   };
 }
