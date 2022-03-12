@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+nix-env --install --profile /Users/stefan/.nixenvs/macbook -A env -f /Users/stefan/repos/nixos-configs/macbook/config.nix
+
