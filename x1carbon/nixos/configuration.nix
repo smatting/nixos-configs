@@ -82,6 +82,7 @@
     autossh
     awscli
     baobab
+    blender
     blueman
     bluez
     brogue
@@ -249,7 +250,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.printing.drivers = [ pkgs.gutenprint pkgs.cups-zj-58 ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.cups-bjnp pkgs.cups-zj-58 ];
 
   services.upower.enable = true;
   # services.redis.enable = false;
