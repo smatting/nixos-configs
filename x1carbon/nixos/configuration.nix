@@ -87,8 +87,6 @@
     awscli
     baobab
     blender
-    blueman
-    bluez
     brogue
     broot
     cachix
@@ -116,6 +114,7 @@
     fd
     feh
     ffmpeg
+    file
     firefox
     font-manager
     fzf
@@ -131,6 +130,7 @@
     google-cloud-sdk
     gparted
     graphviz
+    gthumb
     htop
     httpie
     hledger
@@ -155,19 +155,23 @@
     parted
     postman
     pwgen
+    rawtherapee
     redshift
     ripgrep
     rsync
+    rustup
     scrot
     silver-searcher
     sqlite
     stalonetray
+    terraform
     tree
     tmux
     vcs
     vlc
     weechat
     wget
+    xclip
     xmobar
     xorg.xev
     xsel
@@ -177,6 +181,8 @@
   ];
 
   hardware.pulseaudio.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
   programs.light.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -252,7 +258,13 @@
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    logLevel = "debug";
+    extraFilesConf = ''
+      FileDevice Yes
+    '';
+  };
 
   services.printing.drivers = [ pkgs.gutenprint pkgs.cups-bjnp pkgs.cups-zj-58 ];
 
