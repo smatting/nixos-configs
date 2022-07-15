@@ -34,4 +34,5 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 }
