@@ -5,10 +5,11 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.pkgs = (import ../config.nix {}).pkgs;
+  nixpkgs.pkgs = (import ../config.nix { }).pkgs;
 
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./cachix.nix
     ];
@@ -54,6 +55,7 @@
     autossh
     awscli
     baobab
+    binutils
     blueman
     brightnessctl
     broot
@@ -77,6 +79,7 @@
     dunst
     emacsGcc
     fd
+    ffmpeg-full
     feh
     file
     firefox
@@ -104,6 +107,7 @@
     kubernetes-helm
     hlint
     htop
+    httpie
     inconsolata
     ispell
     jmtpfs
@@ -125,16 +129,20 @@
     newman
     niv
     nix-prefetch-github
+    nixpkgs-fmt
     nodejs
+    mpv
     notify-desktop
     notify-osd
+    obs-studio
     openssl
     ormolu
     pandoc
     p7zip
     pavucontrol
     pinentry
-    (python3.withPackages(ps: with ps; [
+    postgresql
+    (python3.withPackages (ps: with ps; [
       ipdb
       ipython
       matplotlib
@@ -146,6 +154,7 @@
     ]))
     postman
     pwgen
+    rustup
     ripgrep
     runc
     scrot
@@ -224,15 +233,15 @@
   services.xserver.libinput.enable = true;
 
   services.xserver.windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
+    enable = true;
+    enableContribAndExtras = true;
 
-      extraPackages = hpkgs: [
-  	  # hpkgs.taffybar
-  	  hpkgs.xmonad-contrib
-  	  hpkgs.xmonad-extras
-      ];
-    };
+    extraPackages = hpkgs: [
+      # hpkgs.taffybar
+      hpkgs.xmonad-contrib
+      hpkgs.xmonad-extras
+    ];
+  };
   services.xserver.xkbOptions = "compose:caps";
 
   # services.xserver.desktopManager.plasma5.enable = true;
@@ -276,9 +285,9 @@
 
   services.openssh.enable = true;
 
-  services.logind.lidSwitch = "ignore";
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchDocked = "suspend";
+  services.logind.lidSwitchExternalPower = "suspend";
 
   # environment.etc = {
   #   "resolv.conf".text = ''
