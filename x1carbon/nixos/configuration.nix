@@ -162,6 +162,7 @@
     rustup
     scrot
     silver-searcher
+    simple-scan
     sqlite
     stalonetray
     terraform
