@@ -6,6 +6,9 @@
 
 {
   nixpkgs.pkgs = (import ../config.nix { }).pkgs;
+  nix.extraOptions = ''
+    experimental-features = nix-command
+  '';
 
   imports =
     [
@@ -77,7 +80,7 @@
     docker-compose
     # dropbox
     dunst
-    emacsGcc
+    emacsNativeComp
     fd
     ffmpeg-full
     feh
@@ -88,7 +91,6 @@
     gcc
     gdb
     gettext
-    ghcid
     gimp
     git
     github-cli
