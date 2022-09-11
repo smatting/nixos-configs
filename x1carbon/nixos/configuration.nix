@@ -309,7 +309,18 @@
     isNormalUser = true;
     home = "/home/stefan";
     description = "Stefan";
-    extraGroups = ["wheel" "networkmanager" "input" "docker" "video" "adbusers" "scanner" "lp"];
+    extraGroups = [
+                   "adbusers"
+                   "audio"
+                   "docker"
+                   "input"
+                   "jackaudio"
+                   "lp"
+                   "networkmanager"
+                   "scanner"
+                   "video"
+                   "wheel"
+                  ];
     shell = pkgs.zsh;
     uid = 1000;
   };
