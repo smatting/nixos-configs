@@ -154,6 +154,7 @@
     parted
     postman
     pwgen
+    qjackctl
     rawtherapee
     redshift
     ripgrep
@@ -179,6 +180,7 @@
     xsv
     youtube-dl
     yq
+    zynaddsubfx
   ];
 
   hardware.pulseaudio.enable = true;
@@ -631,5 +633,7 @@
   services.udev.packages = [ pkgs.android-udev-rules ];
   programs.adb.enable = true;
   programs.steam.enable = true;
+
+  services.jack.jackd.enable = true;
 
 }

@@ -1,1 +1,1 @@
-(import ./config.nix {}).pkgs
+(import ./config.nix {}).nixpkgs
