@@ -12,11 +12,6 @@
     self: super:
     {
       cups-zj-58  = super.callPackage ./nixos/zj-58/default.nix {};
-    }
-  )
-  (
-    self: super:
-    {
       lowbattery  = super.python3Packages.callPackage
         (
           builtins.fetchTarball
@@ -25,6 +20,7 @@
               sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
             }
         ) {};
+      supercollider-with-plugins = super.callPackage ./nix/supercollider/default.nix {};
     }
   )
 ]
