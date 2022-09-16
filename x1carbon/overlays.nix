@@ -20,7 +20,6 @@
               sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
             }
         ) {};
-      supercollider-with-plugins = super.callPackage ./nix/supercollider/default.nix {};
     }
   )
 ]

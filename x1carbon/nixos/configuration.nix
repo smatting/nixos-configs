@@ -165,7 +165,6 @@
     simple-scan
     sqlite
     stalonetray
-    supercollider-with-plugins
     terraform
     tree
     tmux
