@@ -152,6 +152,7 @@
     simple-scan
     sqlite
     stalonetray
+    supercollider-with-sc3-plugins
     terraform
     tmux
     tree
@@ -293,6 +294,7 @@
 
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchDocked = "suspend";
+  services.teamviewer.enable = true;
 
   programs.zsh.enable = true;
   services.udev.packages = [ pkgs.android-udev-rules ];
