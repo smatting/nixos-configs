@@ -84,6 +84,7 @@
     dbeaver
     dhall
     dhall-json
+    dia
     direnv
     dive
     dmenu
@@ -301,6 +302,6 @@
   programs.adb.enable = true;
   programs.steam.enable = true;
 
-  services.jack.jackd.enable = true;
+  services.jack.jackd.enable = false;
 
 }
