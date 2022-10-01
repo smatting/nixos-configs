@@ -5,10 +5,18 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.pkgs = (import ../config.nix { }).pkgs;
-  nix.extraOptions = ''
-    experimental-features = nix-command
-  '';
+  # nixpkgs.pkgs = (import ../config.nix { }).pkgs;
+
+  nixpkgs.config.allowUnfree = true;
+
+  nix =
+    {
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+      nixPath = [ "nixpkgs=${pkgs.nixpkgsSource}" ];
+    };
+
 
   imports =
     [
@@ -18,7 +26,7 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -96,7 +104,7 @@
     github-cli
     gitg
     gmrun
-    gnome3.eog
+    gnome.eog
     gnumake
     gnumeric
     go
@@ -183,7 +191,7 @@
     vlc
     weechat
     wget
-    wire-desktop-internal
+    # wire-desktop-internal
     xclip
     # xdot
     xfontsel
@@ -224,6 +232,7 @@
 
   # Enable sound.
   # sound.enable = true;
+  hardware.enableAllFirmware = true;
   hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
