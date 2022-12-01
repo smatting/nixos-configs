@@ -57,153 +57,161 @@
 
   services.upower.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # eog
-    # graphmod
-    # xfd
-    # xmessage
+  environment.systemPackages = with pkgs;
+    let
+      pythonWithSomePackages = (python3.withPackages (ps: with ps; [
+        ipdb
+        ipython
+        matplotlib
+        pandas
+        plumbum
+        requests
+        pyyaml
+        toposort
+        python-lsp-server
+      ]));
+    in
 
-    autossh
-    awscli
-    baobab
-    binutils
-    blueman
-    brightnessctl
-    broot
-    buildah
-    cabal-install
-    cachix
-    cassandra
-    cookiecutter
-    coreutils
-    clang
-    curl
-    dbeaver
-    dhall
-    dhall-json
-    direnv
-    dmenu
-    dpkg
-    dnsutils
-    docker-compose
-    # dropbox
-    dunst
-    emacsNativeComp
-    fd
-    ffmpeg-full
-    feh
-    file
-    firefox
-    font-manager
-    fzf
-    gcc
-    gdb
-    gettext
-    gimp
-    git
-    github-cli
-    gitg
-    gmrun
-    gnome.eog
-    gnumake
-    gnumeric
-    go
-    google-chrome
-    gparted
-    graphviz
-    haskellPackages.hoogle
-    haskellPackages.hpack
-    haskellPackages.implicit-hie
-    kubernetes-helm
-    hlint
-    htop
-    httpie
-    inconsolata
-    ispell
-    jmtpfs
-    joplin
-    jq
-    jre
-    jsonnet
-    k9s
-    killall
-    kitty
-    kubectl
-    libinput-gestures
-    libnotify
-    libxml2
-    lowbattery
-    moreutils
-    neovim
-    networkmanagerapplet
-    newman
-    niv
-    nix-prefetch-github
-    nixpkgs-fmt
-    nodejs
-    mpv
-    notify-desktop
-    notify-osd
-    obs-studio
-    openssl
-    ormolu
-    pandoc
-    p7zip
-    pavucontrol
-    pinentry
-    postgresql
-    (python3.withPackages (ps: with ps; [
-      ipdb
-      ipython
-      matplotlib
-      pandas
-      plumbum
-      requests
-      pyyaml
-      toposort
-    ]))
-    postman
-    pwgen
-    rustup
-    ripgrep
-    runc
-    scrot
-    sct
-    shellcheck
-    signal-desktop
-    silver-searcher
-    spruce
-    stalonetray
-    stern
-    taskwarrior
-    timewarrior
-    telepresence
-    tig
-    tmate
-    tmux
-    tree
-    unar
-    unison-ucm
-    unzip
-    v4l-utils
-    visidata
-    v8
-    vlc
-    weechat
-    wget
-    # wire-desktop-internal
-    xclip
-    # xdot
-    xfontsel
-    xmagnify
-    xmobar
-    xorg.xev
-    xsv
-    yq-go
-    youtube-dl
-    vnstat
-    zoom-us
-  ];
+    [
+      # dropbox
+      # eog
+      # graphmod
+      # wire-desktop-internal
+      # xdot
+      # xfd
+      # xmessage
+      autossh
+      awscli
+      baobab
+      binutils
+      blueman
+      brightnessctl
+      broot
+      buildah
+      cabal-install
+      cachix
+      cassandra
+      clang
+      cookiecutter
+      coreutils
+      curl
+      dbeaver
+      dhall
+      dhall-json
+      direnv
+      dmenu
+      dnsutils
+      docker-compose
+      dpkg
+      dunst
+      emacsNativeComp
+      fd
+      feh
+      ffmpeg-full
+      file
+      firefox
+      font-manager
+      fzf
+      gcc
+      gdb
+      gettext
+      gimp
+      git
+      gitg
+      github-cli
+      gmrun
+      gnome.eog
+      gnumake
+      gnumeric
+      go
+      gocryptfs
+      google-chrome
+      gparted
+      graphviz
+      haskellPackages.hoogle
+      haskellPackages.hpack
+      haskellPackages.implicit-hie
+      hlint
+      htop
+      httpie
+      inconsolata
+      ispell
+      jmtpfs
+      joplin
+      jq
+      jre
+      jsonnet
+      k9s
+      killall
+      kitty
+      kubectl
+      kubernetes-helm
+      libinput-gestures
+      libnotify
+      libxml2
+      lowbattery
+      moreutils
+      mpv
+      neovim
+      networkmanagerapplet
+      newman
+      niv
+      nix-prefetch-github
+      nixpkgs-fmt
+      nodejs
+      notify-desktop
+      notify-osd
+      obs-studio
+      openssl
+      p7zip
+      pandoc
+      pavucontrol
+      pinentry
+      postgresql
+      postman
+      pwgen
+      pythonWithSomePackages
+      ripgrep
+      runc
+      rustup
+      scrot
+      sct
+      shellcheck
+      signal-desktop
+      silver-searcher
+      spruce
+      stalonetray
+      stern
+      taskwarrior
+      telepresence
+      tig
+      timewarrior
+      tmate
+      tmux
+      tree
+      unar
+      unison-ucm
+      unzip
+      v4l-utils
+      v8
+      visidata
+      vlc
+      vnstat
+      weechat
+      wget
+      xautolock
+      xclip
+      xfontsel
+      xmagnify
+      xmobar
+      xorg.xev
+      xsv
+      xsel
+      youtube-dl
+      yq-go
+      zoom-us
+      vscode
+    ];
 
 
 
@@ -236,24 +244,23 @@
   hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
-
-  services.xserver.windowManager.xmonad = {
+  services.xserver = {
     enable = true;
-    enableContribAndExtras = true;
+    layout = "us";
+    xkbOptions = "compose:caps";
+    # Enable touchpad support.
+    libinput.enable = true;
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
 
-    extraPackages = hpkgs: [
-      # hpkgs.taffybar
-      hpkgs.xmonad-contrib
-      hpkgs.xmonad-extras
-    ];
+      extraPackages = hpkgs: [
+        # hpkgs.taffybar
+        hpkgs.xmonad-contrib
+        hpkgs.xmonad-extras
+      ];
+    };
   };
-  services.xserver.xkbOptions = "compose:caps";
 
   # services.xserver.desktopManager.plasma5.enable = true;
 
