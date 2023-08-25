@@ -45,6 +45,8 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   networking.networkmanager.enable = true;
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -158,6 +160,7 @@
       niv
       nix-prefetch-github
       nixpkgs-fmt
+      nix-output-monitor
       nodejs
       notify-desktop
       notify-osd
@@ -205,6 +208,7 @@
       xmagnify
       xmobar
       xorg.xev
+      xorg.xmodmap
       xsv
       xsel
       youtube-dl
