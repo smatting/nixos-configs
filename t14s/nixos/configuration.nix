@@ -64,6 +64,7 @@
       pythonWithSomePackages = (python3.withPackages (ps: with ps; [
         ipdb
         ipython
+        keyboard
         matplotlib
         pandas
         plumbum
@@ -71,6 +72,7 @@
         pyyaml
         toposort
         python-lsp-server
+        selenium
       ]));
     in
 
@@ -93,6 +95,7 @@
       cabal-install
       cachix
       cassandra
+      chromedriver
       clang
       cookiecutter
       coreutils
@@ -107,6 +110,7 @@
       dpkg
       dunst
       emacsNativeComp
+      earlyoom
       fd
       feh
       ffmpeg-full
