@@ -19,7 +19,6 @@
                     }
                 )
                 { };
-              nixpkgsSource = "${nixpkgs}";
             }
         )
         (
@@ -32,24 +31,24 @@
             )) self
               super
         )
+        (
+          self: super:
+          {
+              nixpkgsSource = "${nixpkgs}";
+          }
+        )
       ];
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-        inherit overlays;
-      };
       lib = nixpkgs.lib;
     in
     {
 
       nixosConfigurations = {
         nixos = lib.nixosSystem {
-          inherit system pkgs;
+          inherit system;
           modules = [
             ./nixos/configuration.nix
           ];
+          specialArgs = { inherit overlays; };
         };
       };
 

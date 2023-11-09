@@ -2,12 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, overlays, ... }:
 
 {
-  # nixpkgs.pkgs = (import ../config.nix { }).pkgs;
-
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = overlays;
 
   nix =
     {
@@ -167,7 +166,7 @@
       pavucontrol
       pinentry
       postgresql
-      postman
+      # postman
       pwgen
       pythonWithSomePackages
       ripgrep
@@ -218,7 +217,6 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent.enable = false;
 
   # List services that you want to enable:
 
@@ -263,7 +261,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.stefan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "input" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "input" "docker" "wireshark" ];
     shell = pkgs.zsh;
   };
 
@@ -312,5 +310,7 @@
   # };
   #
   services.vnstat.enable = true;
+  
+  programs.wireshark.enable = true;
 
 }
