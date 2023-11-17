@@ -209,7 +209,7 @@
       youtube-dl
       yq-go
       zoom-us
-      vscode
+      apacheHttpd
     ];
 
 
@@ -279,6 +279,9 @@
 
   services.acpid.enable = true;
   programs.slock.enable = true;
+  
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark;
 
   fonts.enableDefaultPackages = true;
   time.timeZone = "Europe/Berlin";
@@ -310,7 +313,5 @@
   # };
   #
   services.vnstat.enable = true;
-  
-  programs.wireshark.enable = true;
 
 }
