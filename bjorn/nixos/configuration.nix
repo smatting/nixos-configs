@@ -12,6 +12,24 @@
     ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+        (
+          self: super:
+            {
+              cups-zj-58 = super.callPackage ./zj-58/default.nix { };
+              lowbattery = super.python3Packages.callPackage
+                (
+                  builtins.fetchTarball
+                    {
+                      url = https://github.com/smatting/low-battery/archive/2de915f91fd18d4ad8f810ab676a67f19fa26354.tar.gz;
+                      sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
+                    }
+                )
+                { };
+              # nixpkgsSource = "${nixpkgs}";
+            }
+        )
+      ];
 
   nix = {
     settings = {
@@ -28,7 +46,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    nixPath = [ "nixpkgs=${pkgs.nixpkgsSource}" ];
+    # nixPath = [ "nixpkgs=${pkgs.nixpkgsSource}" ];
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -64,7 +82,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    (python3.withPackages (ps: with ps; [ requests plumbum ipython ipdb ]))
+    (python3.withPackages (ps: with ps; [ requests plumbum ipython ipdb pandas ]))
     apg
     appimage-run
     autossh
@@ -91,10 +109,8 @@
     docker-compose
     dropbox
     dunst
+    emacs28NativeComp
     easyrsa
-    # emacsGcc
-    emacsNativeComp
-    etcher
     evince
     exfat
     fd
@@ -111,6 +127,7 @@
     gmrun
     gnome3.eog
     gnucash
+    gnumake
     gnupg
     google-chrome
     google-cloud-sdk
@@ -140,7 +157,6 @@
     pandoc
     parted
     pavucontrol
-    postman
     pwgen
     qjackctl
     rawtherapee
@@ -149,16 +165,17 @@
     rsync
     rustup
     scrot
+    shellcheck
     silver-searcher
     simple-scan
     sqlite
     stalonetray
-    supercollider-with-sc3-plugins
     terraform
     tmux
     tree
     vcs
     vlc
+    vscode
     weechat
     wget
     xclip
@@ -166,14 +183,17 @@
     xorg.xev
     xsel
     xsv
-    youtube-dl
     yq
-    zynaddsubfx
+    zsnes
   ];
 
   hardware.enableAllFirmware = true;
+  # hardware.pulseaudio.enable = false;
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
+
+  hardware.sane.enable = true;
+
   services.blueman.enable = true;
   programs.light.enable = true;
 
@@ -194,12 +214,11 @@
   services.printing = {
     enable = true;
     logLevel = "debug";
+    drivers = [ pkgs.gutenprint pkgs.cups-bjnp pkgs.cups-zj-58 pkgs.pkgs.hplipWithPlugin  ];
     extraFilesConf = ''
       FileDevice Yes
     '';
   };
-
-  services.printing.drivers = [ pkgs.gutenprint pkgs.cups-bjnp pkgs.cups-zj-58 ];
 
   services.upower.enable = true;
   # services.redis.enable = false;
@@ -278,7 +297,7 @@
   #   package = pkgs.mysql;
   # };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     # noto-fonts
     # noto-fonts-cjk
     # noto-fonts-emoji
@@ -303,5 +322,19 @@
   programs.steam.enable = true;
 
   services.jack.jackd.enable = false;
+
+  # services.jack = {
+  #   jackd.enable = true;
+  #   # support ALSA only programs via ALSA JACK PCM plugin
+  #   alsa.enable = false;
+  #   # support ALSA only programs via loopback device (supports programs like Steam)
+  #   loopback = {
+  #     enable = true;
+  #     # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+  #     #dmixConfig = ''
+  #     #  period_size 2048
+  #     #'';
+  #   };
+  # };
 
 }
