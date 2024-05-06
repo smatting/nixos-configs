@@ -105,6 +105,7 @@
     dia
     direnv
     dive
+    dnsutils
     dmenu
     docker-compose
     dropbox
@@ -173,6 +174,7 @@
     terraform
     tmux
     tree
+    unzip
     vcs
     vlc
     vscode
