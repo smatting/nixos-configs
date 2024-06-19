@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
     ];
 
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
         (
@@ -33,6 +34,7 @@
 
   nix = {
     settings = {
+      extra-platforms = config.boot.binfmt.emulatedSystems;
       trusted-users = [ "root" "stefan" ];
       substituters = [
         "https://nix-community.cachix.org"
@@ -140,6 +142,8 @@
     httpie
     imagemagick
     inkscape
+    # for mounting android files
+    jmtpfs
     jq
     killall
     kitty

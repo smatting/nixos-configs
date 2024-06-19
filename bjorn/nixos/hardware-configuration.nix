@@ -13,6 +13,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "ntfs-3g" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/cf1fa5b1-b3f7-4e39-880b-204945e5f8c0";
