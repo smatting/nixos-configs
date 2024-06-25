@@ -98,6 +98,7 @@
     clang
     coq
     coreutils
+    crate2nix
     cryptsetup
     ctags
     curl
