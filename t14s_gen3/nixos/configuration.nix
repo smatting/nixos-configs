@@ -35,19 +35,21 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp2s0f0.useDHCP = true;
-  networking.interfaces.wlp3s0.useDHCP = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   networking.networkmanager.enable = true;
 
+  # NOTE: Still suffering from https://github.com/NixOS/nixpkgs/issues/107908
+  # even with this config
+  # https://github.com/NixOS/nixpkgs/pull/167327
+  systemd.network.wait-online.anyInterface = false;
+  networking.interfaces.enp2s0f0.useDHCP = false;
+  networking.interfaces.wlp3s0.useDHCP = false;
+
   # TODO: check if this fixes slow boots
-  systemd.services.systemd-udev-settle.enable = false;
+  # systemd.services.systemd-udev-settle.enable = false;
 
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.network.wait-online.enable = false;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -73,10 +75,12 @@
         pyyaml
         toposort
         python-lsp-server
+        tabulate
       ]));
     in
 
     [
+      _1password
       autossh
       awscli
       baobab
@@ -131,6 +135,7 @@
       hlint
       htop
       httpie
+      hydrogen
       inconsolata
       ispell
       jmtpfs
@@ -149,6 +154,7 @@
       lowbattery
       moreutils
       mpv
+      ncdu
       neovim
       networkmanagerapplet
       newman
@@ -182,6 +188,7 @@
       stern
       taskwarrior
       telepresence
+      terraform
       tig
       timewarrior
       tmate
@@ -210,6 +217,7 @@
       yq-go
       zoom-us
       apacheHttpd
+      vbindiff
     ];
 
 
