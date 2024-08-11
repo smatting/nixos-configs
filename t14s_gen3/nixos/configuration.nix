@@ -6,7 +6,17 @@
 
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "python-2.7.18.7"
+  ];
+
   nixpkgs.overlays = overlays;
+
+  # TODO: remove after hackathon
+  services.cassandra = {
+    enable = true;
+    package = pkgs.cassandra_3_11;
+  };
 
   nix =
     {
@@ -14,6 +24,10 @@
         experimental-features = nix-command flakes
       '';
       nixPath = [ "nixpkgs=${pkgs.nixpkgsSource}" ];
+
+      settings = {
+        trusted-users = [ "root" "stefan" ];
+      };
     };
 
 
@@ -24,10 +38,13 @@
       ./cachix.nix
     ];
 
+
   # Use the systemd-boot EFI boot loader.
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -81,6 +98,7 @@
 
     [
       _1password
+      arandr
       autossh
       awscli
       baobab
@@ -91,7 +109,7 @@
       buildah
       cabal-install
       cachix
-      # cassandra
+      cassandra_3_11
       clang
       cookiecutter
       coreutils
