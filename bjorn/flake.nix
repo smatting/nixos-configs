@@ -19,8 +19,11 @@
       #   inherit overlays;
       # };
       lib = nixpkgs.lib;
+      pkgs = import nixpkgs { inherit system; };
     in
     {
+
+      packages."${system}".a = pkgs.appimage-run;
 
       nixosConfigurations = {
         bjorn = lib.nixosSystem {

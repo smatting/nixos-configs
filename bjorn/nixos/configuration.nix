@@ -102,7 +102,7 @@
     cryptsetup
     ctags
     curl
-    dbeaver
+    dbeaver-bin
     dhall
     dhall-json
     dia
@@ -129,7 +129,7 @@
     git
     gitg
     gmrun
-    gnome3.eog
+    eog
     gnucash
     gnumake
     gnupg
@@ -231,20 +231,20 @@
   services.upower.enable = true;
   # services.redis.enable = false;
 
+  services.libinput.enable = true;
+  services.libinput.touchpad.naturalScrolling = false;
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
-    layout = "us";
-    xkbOptions = "compose:caps";
+    xkb.options = "compose:caps";
+    xkb.layout = "us";
 
     videoDrivers = [ "intel" ];
     deviceSection = ''
       Option "DRI" "3"
     '';
 
-    # Enable touchpad support.
-    libinput.enable = true;
-    libinput.touchpad.naturalScrolling = false;
 
     # Enable the KDE Desktop Environment.
     # services.xserver.displayManager.sddm.enable = true;
