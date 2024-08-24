@@ -86,7 +86,6 @@
   environment.systemPackages = with pkgs; [
     (python3.withPackages (ps: with ps; [ requests plumbum ipython ipdb pandas ]))
     apg
-    appimage-run
     autossh
     awscli
     baobab
@@ -158,6 +157,7 @@
     niv
     nixpkgs-fmt
     nmap
+    obsidian
     openssl
     ormolu
     p7zip
