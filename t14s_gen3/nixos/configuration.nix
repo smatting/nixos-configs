@@ -98,6 +98,7 @@
 
     [
       _1password
+      appimage-run
       arandr
       autossh
       awscli
