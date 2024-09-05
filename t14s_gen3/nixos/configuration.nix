@@ -55,6 +55,36 @@
 
   networking.networkmanager.enable = true;
 
+  security.pki.certificates = [
+    # contents of /root/.local/share/caddy/certificates/local/wildcard_.box1.local.wire.link/wildcard_.box1.local.wire.link.crt
+    ''
+    -----BEGIN CERTIFICATE-----
+    MIIByjCCAXCgAwIBAgIQTsphvIdLv06EyfMlHNrxSjAKBggqhkjOPQQDAjAzMTEw
+    LwYDVQQDEyhDYWRkeSBMb2NhbCBBdXRob3JpdHkgLSBFQ0MgSW50ZXJtZWRpYXRl
+    MB4XDTI0MDkwNTEyNDUxOFoXDTI0MDkwNjAwNDUxOFowADBZMBMGByqGSM49AgEG
+    CCqGSM49AwEHA0IABFCGkiOtwlOb2ptzFJX5ibh+vOuJOSOhjDf0hjI4Sm6bfX5K
+    LsN/B5asFFPMlIsmOiKTLgY5E1ejAG+B5Xw7IomjgZgwgZUwDgYDVR0PAQH/BAQD
+    AgeAMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAdBgNVHQ4EFgQUzU3D
+    ctGDAgMfS5kZeUItLCnA2PkwHwYDVR0jBBgwFoAU4PZ9bChjva16+tjDXcnE88aY
+    1WswJAYDVR0RAQH/BBowGIIWKi5ib3gxLmxvY2FsLndpcmUubGluazAKBggqhkjO
+    PQQDAgNIADBFAiEA5A6jeuiW0IA7ycGkRypkUJd/VFvrGsv9BLNtfOFL1xgCIGys
+    5Cs7U523CPWxxgTKoHegu3LRm4v2DB5Bd6J8aCrn
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIByTCCAW6gAwIBAgIRANMGFfCi9PT5fNKNcOfixIkwCgYIKoZIzj0EAwIwMDEu
+    MCwGA1UEAxMlQ2FkZHkgTG9jYWwgQXV0aG9yaXR5IC0gMjAyNCBFQ0MgUm9vdDAe
+    Fw0yNDA5MDUxMjAzMjJaFw0yNDA5MTIxMjAzMjJaMDMxMTAvBgNVBAMTKENhZGR5
+    IExvY2FsIEF1dGhvcml0eSAtIEVDQyBJbnRlcm1lZGlhdGUwWTATBgcqhkjOPQIB
+    BggqhkjOPQMBBwNCAATEvZcmBI2jcx/0QaLzhBhuERsBZUoZOrX//CNlWONJX5K8
+    8Hg+8JuA5pEnbTM9YiAKoTeorpmMuT1pv8DCgoFto2YwZDAOBgNVHQ8BAf8EBAMC
+    AQYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU4PZ9bChjva16+tjDXcnE
+    88aY1WswHwYDVR0jBBgwFoAUa5tLz9QRNhRWzUcaBIB7ZvZPqRMwCgYIKoZIzj0E
+    AwIDSQAwRgIhAIC3As/KSl7kwHj58gW+grzOJSDnyrKtKCeMkV5tGpRlAiEAgE9K
+    +N3bcChIu0jD34J0LbyNhYWnTrMM6UToRRtzrFQ=
+    -----END CERTIFICATE-----
+    ''
+  ];
+
   # NOTE: Still suffering from https://github.com/NixOS/nixpkgs/issues/107908
   # even with this config
   # https://github.com/NixOS/nixpkgs/pull/167327
@@ -110,6 +140,7 @@
       buildah
       cabal-install
       cachix
+      caddy
       cassandra_3_11
       clang
       cookiecutter
