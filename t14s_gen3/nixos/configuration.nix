@@ -19,6 +19,10 @@
   };
 
   services.pipewire.enable = true;
+  services.pipewire.wireplumber.enable = true;
+  services.pipewire.audio.enable = false;
+  services.pipewire.pulse.enable = false;
+  services.pipewire.alsa.enable = false;
 
   nix =
     {
@@ -135,7 +139,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       cookiecutter
       coreutils
       curl
-      dbeaver
+      dbeaver-bin
       dhall
       dhall-json
       direnv
@@ -160,7 +164,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       gitg
       github-cli
       gmrun
-      gnome.eog
+      eog
       gnumake
       gnumeric
       go
@@ -227,7 +231,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       stalonetray
       stern
       taskwarrior
-      telepresence
+      # telepresence
       terraform
       tig
       timewarrior
@@ -238,7 +242,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       unison-ucm
       unzip
       v4l-utils
-      v8
       visidata
       vlc
       vnstat
@@ -255,7 +258,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       xorg.xmodmap
       xsv
       xsel
-      youtube-dl
+      # youtube-dl
       yq-go
       zoom-us
       apacheHttpd
@@ -283,7 +286,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
   # services.printing.enable = true;
 
   # Enable sound.
-  # sound.enable = true;
   hardware.enableAllFirmware = true;
   hardware.pulseaudio.enable = true;
 
@@ -312,9 +314,14 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
   # services.hypridle.enable = true;
   # services.hyprlock.enable = true;
-
   programs.hyprland.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   programs.waybar.enable = true;
+  programs.hyprlock.enable = true;
 
   # services.xserver.desktopManager.plasma5.enable = true;
 
@@ -357,7 +364,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
   #   };
   # };
   programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryFlavor = "gtk2";
 
   services.openssh.enable = true;
 
