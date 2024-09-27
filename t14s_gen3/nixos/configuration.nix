@@ -20,9 +20,8 @@
 
   services.pipewire.enable = true;
   services.pipewire.wireplumber.enable = true;
-  services.pipewire.audio.enable = false;
-  services.pipewire.pulse.enable = false;
-  services.pipewire.alsa.enable = false;
+  services.pipewire.pulse.enable = true;
+  services.pipewire.alsa.enable = true;
 
   nix =
     {
@@ -216,6 +215,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       pavucontrol
       pinentry
       postgresql
+      pulseaudio # for pactl
       # postman
       pwgen
       pythonWithSomePackages
@@ -287,7 +287,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
   # Enable sound.
   hardware.enableAllFirmware = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -312,12 +312,16 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
   services.xserver.displayManager.gdm.enable = true;
 
-  # services.hypridle.enable = true;
-  # services.hyprlock.enable = true;
   programs.hyprland.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # extraPortals = [];
+
+    extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-hyprland
+        ];
   };
 
   programs.waybar.enable = true;
