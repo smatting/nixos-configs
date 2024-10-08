@@ -51,14 +51,6 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-
-  networking.networkmanager.enable = true;
 
   security.pki.certificates = [
     # contents of /home/stefan/repos/wire-server-nixos/run/caddy/certificates/local/wildcard_.box1.local.wire.link/wildcard_.box1.local.wire.link.crt
@@ -77,31 +69,16 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
     ''
   ];
 
-  # NOTE: Still suffering from https://github.com/NixOS/nixpkgs/issues/107908
-  # even with this config
-  # https://github.com/NixOS/nixpkgs/pull/167327
+  networking.networkmanager.enable = true;
+  # this fixes slow boots
+  systemd.network.netdevs.wlp3s0.enable = false;
   systemd.network.wait-online.anyInterface = false;
-  networking.interfaces.enp2s0f0.useDHCP = false;
-  networking.interfaces.wlp3s0.useDHCP = false;
-
-  # TODO: check if this fixes slow boots
-  # systemd.services.systemd-udev-settle.enable = false;
-
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.network.wait-online.enable = false;
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
 
   services.upower.enable = true;
 
+  environment.extraInit = ''
+  export PATH=~/.bin:$PATH
+  '';
   environment.systemPackages = with pkgs;
     let
       pythonWithSomePackages = (python3.withPackages (ps: with ps; [
@@ -181,6 +158,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       hyprpaper
       inconsolata
       ispell
+      jira-cli-go
       jmtpfs
       joplin
       jq
@@ -230,7 +208,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       spruce
       stalonetray
       stern
-      taskwarrior
+      taskwarrior3
       # telepresence
       terraform
       tig
@@ -289,13 +267,14 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
   hardware.enableAllFirmware = true;
   hardware.pulseaudio.enable = false;
 
-  # Enable the X11 windowing system.
+  services.libinput.enable = true;
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbOptions = "compose:caps";
+    xkb = {
+      options = "compose:caps";
+      layout = "us";
+    };
     # Enable touchpad support.
-    libinput.enable = true;
     # windowManager.xmonad = {
     #   enable = true;
     #   enableContribAndExtras = true;

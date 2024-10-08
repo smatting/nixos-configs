@@ -19,23 +19,15 @@
                     }
                 )
                 { };
-            }
-        )
-        (
-          self: super:
-            (import (
-              builtins.fetchTarball {
-                url = "https://github.com/nix-community/emacs-overlay/archive/36d568cc76f0425a25a46770aae818e5a6cb7cf4.tar.gz";
-                sha256 = "sha256:0vhb3asai6vgfwr429c1d2gr6n3d33kyd1s3f616d738s672cca7";
-              }
-            )) self
-              super
-        )
-        (
-          self: super:
-          {
               nixpkgsSource = "${nixpkgs}";
-          }
+              weechat = super.weechat.override {
+                configure = { availablePlugins, ... }: {
+                  scripts = with super.weechatScripts; [
+                    wee-slack
+                  ];
+                };
+              };
+            }
         )
       ];
       lib = nixpkgs.lib;
