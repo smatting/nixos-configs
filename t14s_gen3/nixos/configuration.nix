@@ -115,6 +115,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       cookiecutter
       coreutils
       curl
+      dos2unix
       dbeaver-bin
       dhall
       dhall-json
@@ -208,6 +209,9 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       spruce
       stalonetray
       stern
+      swayidle
+      wayshot
+      slurp
       taskwarrior3
       # telepresence
       terraform
