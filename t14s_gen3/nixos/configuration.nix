@@ -178,6 +178,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       mpv
       ncdu
       neovim
+      nvim-ghost-python
       networkmanagerapplet
       newman
       niv
@@ -207,6 +208,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       signal-desktop
       silver-searcher
       spruce
+      slack
       stalonetray
       stern
       swayidle

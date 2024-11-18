@@ -1,12 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nvim-ghost.url = "/home/stefan/repos/nvim-ghost-nix-overlay";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nvim-ghost }:
     let
       system = "x86_64-linux";
       overlays = [
+        (nvim-ghost.overlays.default)
         (
           self: super:
             {
@@ -27,6 +29,7 @@
                   ];
                 };
               };
+
             }
         )
       ];
