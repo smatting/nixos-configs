@@ -137,11 +137,13 @@
     gparted
     graphviz
     gthumb
+    hcloud
     hledger
     htop
     httpie
     imagemagick
     inkscape
+    icecast
     # for mounting android files
     jmtpfs
     jq
@@ -158,6 +160,7 @@
     nixpkgs-fmt
     nmap
     obsidian
+    oneko
     openssl
     ormolu
     p7zip
@@ -165,6 +168,7 @@
     parted
     pavucontrol
     pwgen
+    rclone
     qjackctl
     rawtherapee
     redshift
