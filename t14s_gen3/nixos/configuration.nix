@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edit this configuration file to define what should be installed onconfigur
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
@@ -10,13 +10,53 @@
     "python-2.7.18.7"
   ];
 
+  hardware.bluetooth.enable = true;
+
   nixpkgs.overlays = overlays;
 
-  # TODO: remove after hackathon
-  services.cassandra = {
-    enable = true;
-    package = pkgs.cassandra_3_11;
-  };
+  # # TODO: remove after hackathon
+  # services.cassandra = {
+  #   enable = true;
+  #   package = pkgs.cassandra_3_11;
+  # };
+
+  # devel
+#   services.prometheus = {
+#     enable = true;
+#     extraFlags = [ "--web.enable-remote-write-receiver" ];
+#     retentionTime = "20y";
+#
+#     configText = ''
+# global:
+#   query_log_file: /var/run/prometheus/querylog.txt
+# alerting:
+#   alertmanagers: []
+# remote_read: []
+# remote_write: []
+# scrape_configs: []
+# storage:
+#   tsdb: 
+#     out_of_order_time_window: 20y
+# '';
+  # };
+
+  # services.nginx.enable = true;
+
+  # services.grafana = {
+  #   enable = true;
+  #   settings = {
+  #     server = {
+  #       # Listening Address
+  #       http_addr = "127.0.0.1";
+  #       # and Port
+  #       http_port = 3000;
+  #       # Grafana needs to know on which domain and URL it's running
+  #       domain = "your.domain";
+  #       root_url = "http://localhost:3000"; # Not needed if it is `https://your.domain/`
+  #       serve_from_sub_path = true;
+  #     };
+  #   };
+  # };
 
   services.pipewire.enable = true;
   services.pipewire.wireplumber.enable = true;
@@ -86,22 +126,28 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
         ipython
         matplotlib
         pandas
+        docopt
         plumbum
         requests
         pyyaml
         toposort
         python-lsp-server
         tabulate
+        protobuf
+        python-snappy
+        prometheus-client
       ]));
     in
 
     [
+      protobuf
       _1password
       appimage-run
       arandr
       autossh
       awscli
       baobab
+      bench
       binutils
       blueman
       brightnessctl
@@ -120,6 +166,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       dhall
       dhall-json
       direnv
+      dive
       dmenu
       dnsutils
       docker-compose
@@ -176,9 +223,10 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       lowbattery
       moreutils
       mpv
+      msmtp
       ncdu
       neovim
-      nvim-ghost-python
+      nethack
       networkmanagerapplet
       newman
       niv
@@ -188,6 +236,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       nodejs
       notify-desktop
       notify-osd
+      oauth2c
       obs-studio
       openssl
       p7zip
