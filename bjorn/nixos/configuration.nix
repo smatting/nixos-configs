@@ -44,7 +44,7 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -90,7 +90,7 @@
     awscli
     baobab
     blender
-    brogue
+    # brogue
     broot
     cachix
     chromium
@@ -190,18 +190,18 @@
     vscode
     weechat
     wget
+    xan
     xclip
     xmobar
     xorg.xev
     xsel
-    xsv
     yq
     zsnes
   ];
 
   hardware.enableAllFirmware = true;
   # hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
 
   hardware.sane.enable = true;
@@ -226,7 +226,7 @@
   services.printing = {
     enable = true;
     logLevel = "debug";
-    drivers = [ pkgs.gutenprint pkgs.cups-bjnp pkgs.cups-zj-58 pkgs.pkgs.hplipWithPlugin  ];
+    drivers = [ pkgs.gutenprint pkgs.cups-zj-58 pkgs.pkgs.hplipWithPlugin  ];
     extraFilesConf = ''
       FileDevice Yes
     '';
@@ -244,9 +244,9 @@
     xkb.options = "compose:caps";
     xkb.layout = "us";
 
-    videoDrivers = [ "intel" ];
+    videoDrivers = [ "modesetting" ];
     deviceSection = ''
-      Option "DRI" "3"
+      Option "TearFree" "True"
     '';
 
 
