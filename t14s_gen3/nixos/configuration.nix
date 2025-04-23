@@ -107,6 +107,31 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 1VntVOuaAiEA1jMaeXlEHmQHWz1ttX6vkaXbj7X6+tIG4kI9UWobVHw=
 -----END CERTIFICATE-----
     ''
+
+   # /home/stefan/.mitmproxy/mitmproxy-ca-cert.pem
+
+    ''
+    -----BEGIN CERTIFICATE-----
+    MIIDNTCCAh2gAwIBAgIURYolRAlxoGkUjZb3Wf63bXKGcekwDQYJKoZIhvcNAQEL
+    BQAwKDESMBAGA1UEAwwJbWl0bXByb3h5MRIwEAYDVQQKDAltaXRtcHJveHkwHhcN
+    MjIwNTA4MTE1MDQwWhcNMzIwNTA3MTE1MDQwWjAoMRIwEAYDVQQDDAltaXRtcHJv
+    eHkxEjAQBgNVBAoMCW1pdG1wcm94eTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+    AQoCggEBAMIpOM3yKMap9wRoMy/JCz2iBTtUX5tsJSjdpFabsFci4BySsqIEsMrj
+    qnO3Imjj5bC6y5YTA4WycXTf3ITb3qcL6jFYGxSqH0ZlsfW0yoSM6vZ4WIeJfxAA
+    +5XUr6nIZ8jWycAACeVqlBWfXvoRBoV02u4Muvc0MxzTt0zwNLKY0q/ENnhXtYl6
+    A29rj3aIUKJrEWIrl+k/jUTBUlj8BdrizuWKG9qZaE9LP1MrdV7WHD5yH3HypfKv
+    kYsySHl8eDouH67NDT3JUw+IJwgWK2QhO2vNBlXfW1Wl9BiDwZtM2Fgfk8UmVsnG
+    UYx/Com9sPHIha44l85Hfr/VuibitHsCAwEAAaNXMFUwDwYDVR0TAQH/BAUwAwEB
+    /zATBgNVHSUEDDAKBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYE
+    FF6pQAKKTHwBdn6f8rfcEznHOeXqMA0GCSqGSIb3DQEBCwUAA4IBAQBq6jGS0YE6
+    VNqMjRJcoIFX4lglyQq47WDkJf/Gfx3rdInxQ7y/4e18iD1UAv9PnnUO//TMenOf
+    4/9jIcMiXS8zTZ9ru7CiBZbdQUTwN+wzUniNWU6FWGoDt5N9iOSNhro5VXZIL5tu
+    psPUfFXaH+DagHl8Mwf5/EvNpj64i9DGS6IalPC6duSoGIUP8FyuNJFkPnzyVmaL
+    PyLIVDp6drLLtceCO2QTWB1nlhIxq6e/+Dqa6TmjWTwF+2/xW/iyj9mFWuuxjTic
+    paKMdwzshyeN774eC0Jpn2bC+8/7kg2uUaF0QXKNz+xI2lVh+Vtxjoic4R4k86as
+    +U4YJk6+YUL4
+    -----END CERTIFICATE-----
+    ''
   ];
 
   networking.networkmanager.enable = true;
@@ -141,7 +166,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
     [
       protobuf
-      _1password
+      _1password-cli
       appimage-run
       arandr
       autossh
@@ -172,7 +197,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       docker-compose
       dpkg
       dunst
-      emacsNativeComp
       fd
       feh
       ffmpeg-full
@@ -289,13 +313,16 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       xmobar
       xorg.xev
       xorg.xmodmap
-      xsv
+      xan
       xsel
       # youtube-dl
       yq-go
       zoom-us
       apacheHttpd
       vbindiff
+      openfortivpn
+      mitmproxy
+      acpilight # for xbacklight -set 50
     ];
 
 
