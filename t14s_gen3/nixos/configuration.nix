@@ -161,6 +161,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
         protobuf
         python-snappy
         prometheus-client
+        httpx
       ]));
     in
 
@@ -323,6 +324,9 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       openfortivpn
       mitmproxy
       acpilight # for xbacklight -set 50
+      uv
+      poetry
+      pre-commit
     ];
 
 
