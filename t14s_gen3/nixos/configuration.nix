@@ -411,7 +411,19 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
   programs.zsh.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      bip = "192.168.99.1/24";
+      default-address-pools = [
+        {
+            base = "192.168.64.0/18";
+            size = 24;
+        }
+      ];
+    };
+  };
+
   virtualisation.podman.enable = true;
 
   services.acpid.enable = true;
