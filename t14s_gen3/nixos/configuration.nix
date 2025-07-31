@@ -132,6 +132,41 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
     +U4YJk6+YUL4
     -----END CERTIFICATE-----
     ''
+
+    # office-proxmox-qa-wire-local-chain.pem
+    ''
+    -----BEGIN CERTIFICATE-----
+    MIIFHzCCAwegAwIBAgIBATANBgkqhkiG9w0BAQsFADB2MSQwIgYDVQQDDBtQcm94
+    bW94IFZpcnR1YWwgRW52aXJvbm1lbnQxLTArBgNVBAsMJGY4NjFhYTMzLTA0MzIt
+    NDZhZC05YWI5LWRhOTdhY2RjYTgyYzEfMB0GA1UECgwWUFZFIENsdXN0ZXIgTWFu
+    YWdlciBDQTAeFw0yNTAxMjAxNDM0NDNaFw0yNzAxMjAxNDM0NDNaMGgxGTAXBgNV
+    BAsTEFBWRSBDbHVzdGVyIE5vZGUxJDAiBgNVBAoTG1Byb3htb3ggVmlydHVhbCBF
+    bnZpcm9ubWVudDElMCMGA1UEAxMcb2ZmaWNlLXByb3htb3gucWEud2lyZS5sb2Nh
+    bDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALVvRBFIOqPvxmVsE5Qo
+    4X4aZNejMWPSp8MBmzXUn7OXiS+g15b/aGvfeR2zxdAeKn8sbgAzM+VHi3kQPkxx
+    vkgQqaRcXHJssV8f1LCVQLmxS/KytZ9gzyRj0LxkKdjNQ8uhPYpSK6R2U8bX549l
+    sI23eJ907hgQHns1tqRkmzoEG0PdN01IM+p+rNnkg35i4nz+ap9V58UlvS0BL2f3
+    q6dRdDfN3ujcVbCBLczwMm+qsKFmVI64cHERAdOxyhPXKILUYCSVTV/JLzIsRlhe
+    jQfR7tttAWsSDIPbdMVVW5LlA0JAaRWuOEIOZU3Tp+u/n3KEkD74vYSaN6j21c0S
+    sp0CAwEAAaOBxTCBwjAJBgNVHRMEAjAAMBMGA1UdJQQMMAoGCCsGAQUFBwMBMGAG
+    A1UdEQRZMFeHBH8AAAGHEAAAAAAAAAAAAAAAAAAAAAGCCWxvY2FsaG9zdIcEwKgC
+    o4IOb2ZmaWNlLXByb3htb3iCHG9mZmljZS1wcm94bW94LnFhLndpcmUubG9jYWww
+    HQYDVR0OBBYEFCwQ0Z1+3Z4+oDUIziztkgvnT8uDMB8GA1UdIwQYMBaAFLtBYNSX
+    s/S+RLOzCJ/TwxFVWNyEMA0GCSqGSIb3DQEBCwUAA4ICAQBUuVuBCb3lfuG9ZMNC
+    nC3yCzyxPAqxm0RyjnS/SXDysItlGj5EF24766PMjMmvjtY7VUwlZEo7Yg/1uNHH
+    0SlLO9xrfZr8rQaMv2NV1f5/NS+1q9oXzD0lnXnrqZG/pBgR3Y65V7qs5XB5Oa2x
+    kgZUvguw11rPZCGfmiPP3ZH6EFYoYUiT8bFE2yeFS0+y8HjLPGojZasSTDz+Dh/O
+    MzUEZTgvYVidTU+6udWAXkyp+VafVU0WzUakunDwl4zTB04puYazt+vXwsMjG6Zq
+    zyk/xXV7mYmfYppcW5lmUBpa8lfHkol26h6ZcR/8+LN3KHvGuBZmh7jRi23wSLwq
+    fPJcE+0eKLF7xNd6SwokX+6NYQuJpNFvQF+9j2vu/b8nfeVaP12FqwEybheDSjAE
+    dcxLZhUGFtvuPQaXx2/k5uQtZGNJmdjpN4wQhD4mV+9NV/2jd/fAk4puNMqXBYNz
+    Wp8x2bso9em9RCqbYMjSEAetTjmAEya2058LHImMJFNR6uaFfqGbmwWvJwzkmAxy
+    iO91l6EDNw9cJwOHXMk4yqIR1phZQ48RtNX93+f5dUmLBydz2HMoQfYbIs8FvJ/u
+    6tLIvGqV+ICbSRSpiEvCQC0h/af4iQBj1bOaKWhKnGD6mUHheAzCzMh3UCv3MhgF
+    EDpvslLg3Ot/dR1R6ri0LJQ6tg==
+    -----END CERTIFICATE-----
+    ''
+
   ];
 
   networking.networkmanager.enable = true;
@@ -182,7 +217,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       cabal-install
       cachix
       caddy
-      cassandra_3_11
       clang
       cookiecutter
       coreutils
@@ -213,6 +247,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       gitg
       github-cli
       gmrun
+      gron # json viewer flattened
       eog
       gnumake
       gnumeric
@@ -351,7 +386,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
 
   # Enable sound.
   hardware.enableAllFirmware = true;
-  hardware.pulseaudio.enable = false;
+  service.pulseaudio.enable = false;
 
   services.libinput.enable = true;
   services.xserver = {
@@ -375,7 +410,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
   
 
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
   programs.hyprland.enable = true;
   xdg.portal = {
