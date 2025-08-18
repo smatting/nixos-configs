@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     (python3.withPackages (ps: with ps; [ requests plumbum ipython ipdb pandas ]))
     apg
+    arandr
     autossh
     awscli
     baobab
@@ -358,6 +359,69 @@
         settings.allow_anonymous = true;
       }
     ];
+  };
+
+  services.redis.enable = true;
+  services.prometheus = {
+    enable = true;
+
+    pushgateway.enable = true;
+    alertmanager.enable = true;
+    alertmanager.configText = ''
+    # global:
+    #   # Global configuration
+    #   smtp_smarthost: 'localhost:587'
+    #   smtp_from: 'alertmanager@example.com'
+    
+    # Route configuration
+    route:
+      group_by: ['alertname']
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 1h
+      receiver: 'pushover-notifications'
+    
+    # Receivers configuration
+    receivers:
+    - name: 'pushover-notifications'
+      pushover_configs:
+      - token: 'aijvwms7yjk9o26rx6sahugrpeq5ty'
+        send_resolved: false
+        user_key: 'uvasnq79u2x5hzkd4n3ih55kghns5i'
+        title: 'Alert: {{ .GroupLabels.alertname }}'
+        message: |
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Instance: {{ .Labels.instance }}
+          Severity: {{ .Labels.severity }}
+          Status: {{ .Status }}
+          {{ end }}
+        priority: '{{ if eq .Status "firing" }}1{{ else }}0{{ end }}'
+        url: 'http://localhost:9090'  # Link to your Prometheus instance
+        url_title: 'View in Prometheus'
+    
+    # Inhibit rules (optional - prevents duplicate alerts)
+    # inhibit_rules:
+    # - source_match:
+    #     severity: 'critical'
+    #   target_match:
+    #     severity: 'warning'
+    #   equal: ['alertname', 'dev', 'instance']
+    '';
+
+    scrapeConfigs = [
+      {
+        job_name = "pushgateway";
+        static_configs = [{
+          targets = [ "localhost:9091" ];
+        }];
+        scrape_interval = "15s";
+      }
+    ];
+
+    extraFlags = [ "--web.enable-remote-write-receiver" ];
+    retentionTime = "90d";
   };
 
 
