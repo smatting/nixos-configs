@@ -1,15 +1,23 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-new.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nixpkgs-new }:
     let
       system = "x86_64-linux";
+
+      claude-code = 
+          let pkgs = import nixpkgs-new { inherit system; config.allowUnfree = true; };
+        in
+          pkgs.claude-code;
+
       overlays = [
         (
           self: super:
             {
+              inherit claude-code;
               lowbattery = super.python3Packages.callPackage
                 (
                   builtins.fetchTarball
