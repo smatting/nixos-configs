@@ -332,6 +332,8 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       pwgen
       pythonWithSomePackages
       ripgrep
+      restic
+      rclone
       runc
       rustup
       scrot
@@ -346,6 +348,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       swayidle
       wayshot
       slurp
+      sqlite
       taskwarrior3
       # telepresence
       terraform
