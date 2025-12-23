@@ -275,6 +275,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       gnumake
       gnumeric
       go
+      exiftool
       gthumb
       gocryptfs
       google-chrome
