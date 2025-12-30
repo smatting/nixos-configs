@@ -130,6 +130,7 @@
     gitg
     gmrun
     eog
+    geckodriver
     gnucash
     gnumake
     gnupg
@@ -149,8 +150,10 @@
     jmtpfs
     jq
     killall
+    kind
     kitty
     libnotify
+    libreoffice
     lowbattery
     lsof
     mosquitto
@@ -186,6 +189,7 @@
     tmux
     tree
     unzip
+    visidata
     vcs
     vlc
     vscode
