@@ -224,6 +224,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
     [
       protobuf
       _1password-cli
+      actionlint
       appimage-run
       arandr
       autossh
@@ -289,6 +290,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       httpie
       hydrogen
       hyprpaper
+      imagemagick
       inconsolata
       ispell
       jira-cli-go
