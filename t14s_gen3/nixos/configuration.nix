@@ -392,6 +392,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       uv
       poetry
       pre-commit
+      yamllint
     ];
 
 
