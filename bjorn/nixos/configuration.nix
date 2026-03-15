@@ -96,6 +96,7 @@
     cachix
     chromium
     clang
+    claude-code
     coq
     coreutils
     crate2nix
@@ -113,7 +114,6 @@
     docker-compose
     dropbox
     dunst
-    emacs28NativeComp
     easyrsa
     evince
     exfat
@@ -144,6 +144,7 @@
     hledger
     htop
     httpie
+    hyprpaper
     imagemagick
     inkscape
     icecast
@@ -155,7 +156,7 @@
     kitty
     libnotify
     libreoffice
-    lowbattery
+    # lowbattery
     lsof
     mosquitto
     neovim
@@ -214,7 +215,7 @@
   hardware.sane.enable = true;
 
   services.blueman.enable = true;
-  programs.light.enable = true;
+  #programs.light.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -233,7 +234,7 @@
   services.printing = {
     enable = true;
     logLevel = "debug";
-    drivers = [ pkgs.gutenprint pkgs.cups-zj-58 pkgs.pkgs.hplipWithPlugin  ];
+    drivers = [ pkgs.gutenprint pkgs.pkgs.hplipWithPlugin  ];
     extraFilesConf = ''
       FileDevice Yes
     '';
@@ -245,6 +246,20 @@
   services.libinput.enable = true;
   services.libinput.touchpad.naturalScrolling = false;
 
+  services.xserver.displayManager.gdm.enable = true;
+
+  programs.hyprland.enable = true;
+  xdg.portal = {
+    enable = true;
+    # extraPortals = [];
+
+    extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-hyprland
+        ];
+  };
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -255,6 +270,7 @@
     deviceSection = ''
       Option "TearFree" "True"
     '';
+
 
 
     # Enable the KDE Desktop Environment.
@@ -336,8 +352,8 @@
   services.teamviewer.enable = true;
 
   programs.zsh.enable = true;
-  services.udev.packages = [ pkgs.android-udev-rules ];
-  programs.adb.enable = true;
+  # services.udev.packages = [ pkgs.android-udev-rules ];
+  # programs.adb.enable = true;
   programs.steam.enable = true;
 
   services.jack.jackd.enable = false;
