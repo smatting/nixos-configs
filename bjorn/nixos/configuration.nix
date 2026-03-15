@@ -131,6 +131,7 @@
     gmrun
     eog
     geckodriver
+    ghostscript
     gnucash
     gnumake
     gnupg
@@ -188,6 +189,7 @@
     terraform
     tmux
     tree
+    typst
     unzip
     visidata
     vcs
@@ -339,6 +341,8 @@
   programs.steam.enable = true;
 
   services.jack.jackd.enable = false;
+
+  services.tailscale.enable = true;
 
   # services.jack = {
   #   jackd.enable = true;
