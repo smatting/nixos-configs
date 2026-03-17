@@ -198,6 +198,8 @@
     vscode
     weechat
     wget
+    wofi
+    wl-clipboard
     xan
     xclip
     xmobar
@@ -212,10 +214,21 @@
   # hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libvdpau-va-gl
+    ];
+  };
+
   hardware.sane.enable = true;
 
   services.blueman.enable = true;
   #programs.light.enable = true;
+
+  programs.waybar.enable = true;
+  programs.hyprlock.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -255,7 +268,6 @@
 
     extraPortals = with pkgs; [
           xdg-desktop-portal-gtk
-          xdg-desktop-portal-wlr
           xdg-desktop-portal-hyprland
         ];
   };
@@ -276,18 +288,16 @@
     # Enable the KDE Desktop Environment.
     # services.xserver.displayManager.sddm.enable = true;
     # services.xserver.desktopManager.plasma5.enable = true;
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-
-      extraPackages = hpkgs: [
-        hpkgs.xmonad-contrib
-        hpkgs.xmonad-extras
-      ];
-    };
+    # windowManager.xmonad = {
+    #   enable = true;
+    #   enableContribAndExtras = true;
+    #
+    #   extraPackages = hpkgs: [
+    #     hpkgs.xmonad-contrib
+    #     hpkgs.xmonad-extras
+    #   ];
+    # };
   };
-
-  services.compton.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.stefan = {
