@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, overlays, ... }:
 
 {
   imports =
@@ -12,25 +12,6 @@
     ];
 
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [
-        (
-          self: super:
-            {
-              cups-zj-58 = super.callPackage ./zj-58/default.nix { };
-              lowbattery = super.python3Packages.callPackage
-                (
-                  builtins.fetchTarball
-                    {
-                      url = https://github.com/smatting/low-battery/archive/2de915f91fd18d4ad8f810ab676a67f19fa26354.tar.gz;
-                      sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
-                    }
-                )
-                { };
-              # nixpkgsSource = "${nixpkgs}";
-            }
-        )
-      ];
 
   nix = {
     settings = {
@@ -50,6 +31,8 @@
     '';
     # nixPath = [ "nixpkgs=${pkgs.nixpkgsSource}" ];
   };
+  nixpkgs.overlays = overlays;
+  nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -207,6 +190,7 @@
     xsel
     yq
     zsnes
+    lowbattery
   ];
 
   hardware.enableAllFirmware = true;
