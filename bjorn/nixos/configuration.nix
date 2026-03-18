@@ -74,7 +74,6 @@
     awscli
     baobab
     blender
-    # brogue
     broot
     cachix
     chromium
@@ -92,12 +91,13 @@
     dia
     direnv
     dive
-    dnsutils
     dmenu
+    dnsutils
     docker-compose
     dropbox
     dunst
     easyrsa
+    eog
     evince
     exfat
     fd
@@ -107,14 +107,13 @@
     firefox
     font-manager
     fzf
+    geckodriver
     gh
+    ghostscript
     gimp
     git
     gitg
     gmrun
-    eog
-    geckodriver
-    ghostscript
     gnucash
     gnumake
     gnupg
@@ -128,18 +127,17 @@
     htop
     httpie
     hyprpaper
+    icecast
     imagemagick
     inkscape
-    icecast
-    # for mounting android files
-    jmtpfs
+    jmtpfs # for mounting android files
     jq
     killall
     kind
     kitty
     libnotify
     libreoffice
-    # lowbattery
+    lowbattery
     lsof
     mosquitto
     neovim
@@ -157,9 +155,9 @@
     parted
     pavucontrol
     pwgen
-    rclone
     qjackctl
     rawtherapee
+    rclone
     redshift
     ripgrep
     rsync
@@ -175,14 +173,14 @@
     tree
     typst
     unzip
-    visidata
     vcs
+    visidata
     vlc
     vscode
     weechat
     wget
-    wofi
     wl-clipboard
+    wofi
     xan
     xclip
     xmobar
@@ -190,7 +188,6 @@
     xsel
     yq
     zsnes
-    lowbattery
   ];
 
   hardware.enableAllFirmware = true;
