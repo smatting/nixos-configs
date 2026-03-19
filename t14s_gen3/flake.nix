@@ -7,11 +7,9 @@
   outputs = { self, nixpkgs, nixpkgs-new }:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs-new { inherit system; config.allowUnfree = true; };
 
-      claude-code = 
-          let pkgs = import nixpkgs-new { inherit system; config.allowUnfree = true; };
-        in
-          pkgs.claude-code;
+      claude-code = pkgs.claude-code;
 
       overlays = [
         (
@@ -42,6 +40,7 @@
       lib = nixpkgs.lib;
     in
     {
+      legacyPackages = pkgs;
 
       nixosConfigurations = {
         nixos = lib.nixosSystem {
