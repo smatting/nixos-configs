@@ -22,8 +22,8 @@
                 (
                   builtins.fetchTarball
                     {
-                      url = https://github.com/smatting/low-battery/archive/2de915f91fd18d4ad8f810ab676a67f19fa26354.tar.gz;
-                      sha256 = "0mi5yljvig2frfdxclhhykz9a5xg9vw8sy8hdddka0pv165z58jj";
+                      url = https://github.com/smatting/low-battery/archive/1ddf367f1d6de4ba6f30e95e3833f466668572ba.tar.gz;
+                      sha256 = "sha256:111igpb09q63bdv36h4yg3vs1szfdm02lqmclqb2hwhjffjdn45y";
                     }
                 )
                 { };

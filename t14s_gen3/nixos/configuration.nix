@@ -329,7 +329,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       p7zip
       pandoc
       pavucontrol
-      pinentry
+      pinentry-gnome3
       postgresql
       pulseaudio # for pactl
       # postman
@@ -349,6 +349,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       slack
       stalonetray
       stern
+      swaybar
       swayidle
       wayshot
       slurp
@@ -375,7 +376,6 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       xautolock
       xclip
       xfontsel
-      xmagnify
       xmobar
       xorg.xev
       xorg.xmodmap
