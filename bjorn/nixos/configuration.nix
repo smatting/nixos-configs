@@ -168,6 +168,8 @@
     simple-scan
     sqlite
     stalonetray
+    swaybg
+    swayidle
     terraform
     tmux
     tree

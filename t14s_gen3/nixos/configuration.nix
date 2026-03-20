@@ -349,6 +349,7 @@ EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU0bWsVdamlFyILBQrrmo2iTL9
       slack
       stalonetray
       stern
+      swaybg
       swayidle
       wayshot
       slurp
